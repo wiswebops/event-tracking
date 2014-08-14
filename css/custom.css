@@ -1,0 +1,48 @@
+
+
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Quicksand', sans-serif;
+	color: #1b325f;
+}
+
+body{
+	font-family: 'Raleway', sans-serif;
+}
+
+.bluebg{
+	background-color:#e9f2f9;
+}
+
+/* LOGIN PAGE */
+
+.loginSection{
+	margin-top:150px;
+}
+
+.loginBox{
+	background-color: #fff;
+	padding: 0 20px 20px 20px;
+	border: 2px solid #9cc4e4;
+	overflow: auto;
+}
+.form-signin-heading{
+	text-align: center;
+}
+
+.loginSection .btn-primary{
+	margin-right:10px;
+}
+
+/* DASHBOARD PAGE */
+
+.float-left{
+	float:;left;
+}
+
+.float-right{
+	float:right;
+}
+
+.form{
+    display: none;
+}
