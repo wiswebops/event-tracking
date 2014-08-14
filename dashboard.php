@@ -28,7 +28,7 @@
           <div class="col-lg-4">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-barcode"></i> Create New Scanner</h3>
+                <h3 class="panel-title"><i class="fa fa-barcode"></i> Create New Scanners</h3>
               </div>
               <div class="panel-body">
                 
