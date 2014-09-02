@@ -12,14 +12,14 @@
 <ul>
   
 <li>                                   
-<a href="http://startific.com">
+<a href="dashboard.php">
 <i class="fa fa-dashboard"></i>
 <span class="nav-text">Dashboard</span>
 </a>
 </li>   
    
 <li>                                 
-<a href="http://startific.com">
+<a href="events.php">
 <i class="fa fa-calendar"></i>
 <span class="nav-text">Event</span>
 </a>
@@ -27,19 +27,14 @@
 
     
 <li>                                 
-<a href="http://startific.com">
+<a href="report.php">
 <i class="fa fa-bar-chart-o"></i>
 <span class="nav-text">Report</span>
 </a>
 </li>   
   
 
-<li>                                
-<a href="http://startific.com">
-<i class="fa fa-user"></i>
-<span class="nav-text">Users</span>
-</a>
-</li>   
+
     
 </ul>
         </nav>
