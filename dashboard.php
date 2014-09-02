@@ -24,7 +24,7 @@
         </div><!-- /.row -->
 
 
-         <div class="row">
+        <!-- <div class="row">
           <div class="col-lg-4">
             <div class="panel panel-primary">
               <div class="panel-heading">
@@ -66,13 +66,13 @@
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-            <?php
+            <?php /*
 				$query = mysql_query("SELECT DISTINCT iEventGroupID, vGroupName FROM Sessions WHERE dSessionBegin >= DATE_FORMAT( CURDATE( ) ,  '%Y-1-1' )");
 				
 				while ($row = mysql_fetch_object($query))
 				{
 					echo '<li value="'.$row->iEventGroupID.'">'.$row->vGroupName.'</li>';
-				}
+				}*/
 				
 		    ?>
              
@@ -150,7 +150,121 @@
             </div>
           </div>
 		</div>
+          <div class="col-lg-4">-->
+
+             <div class="row">
+          <div class="col-lg-5">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <p class="announcement-heading">Create New Scanner</p>
+                    <!-- <p class="announcement-text">New Mentions!</p> -->
+                  </div>
+                </div>
+              </div>
+              <a href="#">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    
+                    <div class="col-xs-12 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <div class="row">
+                 <div class="col-xs-12">
+                    <p class="announcement-heading">Create New Event Wizard</p>
+                    <!-- <p class="announcement-text">To-Do Items</p> -->
+                  </div>
+                </div>
+              </div>
+              <a href="#">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">                    
+                    <div class="col-xs-12 text-right">
+                      <a href="http://wis-helpdesk.com/event_tracking/index2.php"><i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          </div>
+
+
+          <div class="col-lg-10">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-clock-o"></i> Recent Events</h3>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+              <table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>HR 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 11-14, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                  <tr>
+                    <td>SuccessFactors 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 11-14, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                  <tr>
+                    <td>GRC 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 18-21, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                  <tr>
+                    <td>Financials 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 18-21, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                  <tr>
+                    <td>HANA 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 24-27, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+                <div class="text-right">
+                  <a href="#">View All Events <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="col-lg-4">
+            
+            
+        </div><!-- /.row -->
+
+      </div><!-- /#page-wrapper -->
+
+    </div><!-- /#wrapper -->
+
+   <?php include('includes/footer.php'); ?>
             
             
 			</div><!-- /.row -->
