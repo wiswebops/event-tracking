@@ -1,5 +1,56 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="main-menu">
+
+
+  
+ <!-- <div>
+    <a class="logo" href="http://startific.com">
+    </a> 
+  </div> 
+<div class="settings"></div>
+<div class="scrollbar" id="style-1"> -->
+      
+<ul>
+  
+<li>                                   
+<a href="http://startific.com">
+<i class="fa fa-dashboard"></i>
+<span class="nav-text">Dashboard</span>
+</a>
+</li>   
+   
+<li>                                 
+<a href="http://startific.com">
+<i class="fa fa-calendar"></i>
+<span class="nav-text">Event</span>
+</a>
+</li>   
+
+    
+<li>                                 
+<a href="http://startific.com">
+<i class="fa fa-bar-chart-o"></i>
+<span class="nav-text">Report</span>
+</a>
+</li>   
+  
+
+<li>                                
+<a href="http://startific.com">
+<i class="fa fa-user"></i>
+<span class="nav-text">Users</span>
+</a>
+</li>   
+    
+</ul>
+        </nav>
+
+
+
+
+
+
+<!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -10,7 +61,7 @@
           <a class="navbar-brand" href="dashboard.php">Event Tracking Website</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
+       
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
             <li class="active"><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -31,5 +82,5 @@
                 <li><a href="login.php"><i class="fa fa-power-off"></i> Log Out</a></li>
               </ul>
           </ul>
-        </div><!-- /.navbar-collapse -->
-      </nav>
+        </div>
+      </nav>-->
