@@ -1,17 +1,12 @@
+<?php include('head.php'); ?>
 
-
-
-
-    <div id="wrapper">
+ <div id="wrapper">
 
       <!-- Navigation -->
-     <?php include('head.php'); ?> 
-     
-      <?php include('nav.php');
-	 
-
-
-	  include('includes/functions.php');
+   <?php 
+      include('nav.php');
+  	 
+  	  include('includes/functions.php');
 	  ?>
 
 
@@ -153,53 +148,36 @@
           <div class="col-lg-4">-->
 
              <div class="row">
-          <div class="col-lg-5">
+          <div class="col-md-5">
             <div class="panel panel-info">
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-12">
-                    <p class="announcement-heading">Create New Scanner</p>
-                    <!-- <p class="announcement-text">New Mentions!</p> -->
+                    <p class="announcement-heading"><a href="addScanner.php">Create New Scanner</a></p>
+                    
                   </div>
                 </div>
               </div>
-              <a href="#">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    
-                    <div class="col-xs-12 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
-                    </div>
-                  </div>
-                </div>
-              </a>
+             
             </div>
           </div>
-          <div class="col-lg-5">
+          <div class="col-md-5">
             <div class="panel panel-info">
               <div class="panel-heading">
                 <div class="row">
                  <div class="col-xs-12">
-                    <p class="announcement-heading">Create New Event Wizard</p>
-                    <!-- <p class="announcement-text">To-Do Items</p> -->
+                    <p class="announcement-heading"><a href="addEvent.php">Create New Event</a></p>
+                    
                   </div>
                 </div>
               </div>
-              <a href="#">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">                    
-                    <div class="col-xs-12 text-right">
-                      <a href="http://wis-helpdesk.com/event_tracking/index2.php"><i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </a>
+              
             </div>
           </div>
           </div>
 
-
-          <div class="col-lg-10">
+        <div class="row">
+          <div class="col-md-10 col-xs-12">
             <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title"><i class="fa fa-clock-o"></i> Recent Events</h3>
@@ -264,14 +242,10 @@
 
     </div><!-- /#wrapper -->
 
-   <?php include('includes/footer.php'); ?>
+   <?php include('footer.php'); ?>
             
             
-			</div><!-- /.row -->
 
-      </div><!-- /#page-wrapper -->
-
-    </div><!-- /#wrapper -->
 
  <script>
 
@@ -363,4 +337,4 @@ $('#StartWizard').live('click', function(){
              <input type="file" class="float-right" title="Search for a file to add">
           </div>
 </div>
-  <?php include('footer.php'); ?>
+  

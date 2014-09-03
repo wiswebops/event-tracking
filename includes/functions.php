@@ -1,5 +1,5 @@
 <?php
-include('includes/connect.php');
+/*include('includes/connect.php');*/
 
 date_default_timezone_set('EST');
 
