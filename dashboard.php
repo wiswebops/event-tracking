@@ -307,9 +307,6 @@ $('#StartWizard').live('click', function(){
 									   });
 
 
-
-
-
 </script>
 <div id='testdiv'>
 
