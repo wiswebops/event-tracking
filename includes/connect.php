@@ -1,7 +1,7 @@
 <?php
-define('DB_HOST','localhost');
-define('DB_USER','wishelpd_aciampi');
-define('DB_PASS','abc12345');
+define('DB_HOST','54.227.215.252');
+define('DB_USER','b2b2bd32573705');
+define('DB_PASS','63a5494f');
 define('DB_NAME','wishelpd_maps');
 
 $connection = mysql_connect(DB_HOST,DB_USER,DB_PASS) or die(mysql_error());
