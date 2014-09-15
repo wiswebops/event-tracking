@@ -214,7 +214,6 @@ $('#StartWizard').live('click', function(){
 		
 		
 	});
-
 									   
 									   });
 

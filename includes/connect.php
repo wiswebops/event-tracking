@@ -13,7 +13,6 @@ define('DB_PASS','abc12345');
 
     mysqli_connect($server, $username, $password);
 
-
     mysqli_select_db($db);
 
 /*
