@@ -1,6 +1,5 @@
 <?php
-include('includes/connect.php');
-
+include('connect.php');
 date_default_timezone_set('EST');
 
 /* // Add User function
@@ -153,8 +152,10 @@ function addRooms($confID, $levelID, $roomid, $name, $scannerID, $x, $y, $width,
 	}
 	else
 	{
-		echo 'A new room inserted.';
-	    $query = mysql_query("INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');") or die(mysql_error());
+		if($delete != 'true'){
+        echo 'A new room inserted.';
+        echo "INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');";
+	    $query = mysql_query("INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');") or die(mysql_error());}
 	}
 	
 	
@@ -174,4 +175,23 @@ function getRoomsByLevelID($floor_id)
 	return $roomarray;
 }
 
+function save_room_2_session($roomID, $sessionID)
+{
+	/*insert or update*/
+	
+	$query = mysql_query('insert into Room_2_Sess (RoomID, SessionID) values ('.$roomID.', '.$sessionID.') on duplicate key update
+  RoomID = '.$roomID.';') or die(mysql_error());
+}
+
+function getSessionsByRoomIDs($RoomIDs)
+{
+	$SessionData = array();
+	echo 'select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');';
+	$query = mysql_query('select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');') or die(mysql_error());
+	while ($row = mysql_fetch_object($query)) {
+         array_push($SessionData, $row);
+    }
+	mysql_free_result($query);
+	return $SessionData;
+}
 ?>

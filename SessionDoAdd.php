@@ -5,9 +5,9 @@ if(isset($_SESSION['user'])) { */
 <?php
 include('includes/functions.php');
 
-$Sesson_Rel = json_decode($_POST['Nodes']);
+$Sesson_Rel = json_decode(stripslashes($_POST['Nodes']));
 $CatalogSess = $_POST['catalogData'];
-
+var_dump($Sesson_Rel);
 foreach($Sesson_Rel as $key => $value){
 	foreach($value as $arrayValue)
 	{		
@@ -20,7 +20,7 @@ foreach($CatalogSess as $values){
 }
 
 
-mysql_close();
+
 return;
 
 if(isset($_POST['submit'])) {

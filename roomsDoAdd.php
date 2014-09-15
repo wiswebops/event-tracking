@@ -4,14 +4,15 @@ if(isset($_SESSION['user'])) { */
 ?>
 <?php
 include('includes/functions.php');
-$RectNodes = json_decode($_POST['Nodes']);
+
+var_dump($_POST['Nodes']);
+$RectNodes = $_POST['Nodes'];
 foreach($RectNodes as $value){
-	$NodeObject = simplexml_load_string($value);
+	$NodeObject = simplexml_load_string(stripslashes ($value));
 	addRooms($_POST['confID'],$_POST['level_id'], $NodeObject['id'], $NodeObject['roomname'], $NodeObject['scannerid'], $NodeObject['x'], $NodeObject['y'], $NodeObject['width'], $NodeObject['height'], $value, ($NodeObject['delete'] ? $NodeObject['delete'] : NULL) );  
 }
 
 
-mysql_close();
 return;
 
 if(isset($_POST['submit'])) {

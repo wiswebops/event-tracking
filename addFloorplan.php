@@ -1,26 +1,78 @@
-<?php include('head.php'); ?> 
+<?php 
+include 'includes/connect.php';
+?>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+</head>
+<script>
+ 
 
-<div class="row">
-	<div class="col-lg-4">
+    
+$('button').live('click', function(){
+
+    if($(this).parent().find('input[value=],select[value=-1]').length == 0)
+    {
+        $(this).parent().submit();
+        /*
+       var data = new FormData($('#formz'));
+       
+        
+        X('#formz').submit(function(e){
+         
+         alert('ahah3');
+         X.ajax({
+           		type: "POST",
+          		url: "floorplanupload.php",
+           	    data: data,
+		        cache: false,
+				processData: false,
+                contentType: 'multipart/form-data',
+		        success: function(x){
+                   console.log(x);
+                }});
+        
+     }
+     );*/
+    }
+    else
+     alert("One or more fields are empty!");
+
+});
+
+    
+</script>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<div class="row" style="width:400px;margin:auto;">
+	
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-barcode"></i> Upload New Floor Plan</h3>
 			</div>
 			<div class="panel-body">  
-				<form class="form-newscanner" role="form" enctype="multipart/form-data">
-					<input type="text" class="form-control" placeholder="Conference ID" required autofocus>
+				<form id="formz" class="form-newscanner" role="form" enctype="multipart/form-data" action="floorplanupload.php" method="POST">
+					
+					 <select name="ConfID" type="text" class="form-control" required autofocus>
+                    <?php
+                          echo '<option class="form-control" value = "-1" disabled">Select a Conference</option>';                          
+                          $query = mysql_query("SELECT DISTINCT iEventGroupID, vGroupName FROM Sessions WHERE dSessionBegin >= DATE_FORMAT( CURDATE( ) ,  '%Y-1-1')");
+		                  while ($row = mysql_fetch_object($query))
+			              echo '<option value="'.$row->iEventGroupID.'" >'.$row->vGroupName.'</option>';
+                    ?>
+                    </select>
+					<p style="color: #999; font-size: 11px;"> </p>
+					<input name="floorplanName" type="text" class="form-control" placeholder="Floor Plan Name" required> 
 					
 					<p style="color: #999; font-size: 11px;"> </p>
-					<input type="text" class="form-control" placeholder="Floor Plan Name" required> 
-					
-					<p style="color: #999; font-size: 11px;"> </p>
-					<input type="file" class="form-control" name="imgName" placeholder="Select Image" required id="imgName"/>
-					
-					<a href="#" class="openform"><button type="button" class="btn btn-primary float-right" type="submit">Submit</button></a>
+					<input id="inputfile" name="ImagePath" type="file" class="form-control"  placeholder="Select Image" required id="imgName"/>
+                    <label>Overwrite if exist:</label><input style="margin-left: 10px;" name="overrride" type="checkbox" required>
+					<br>
+					<button type="button" class="btn btn-primary float-right">Submit</button>
 				</form>
 			</div>
 		</div>
-	</div>
+	
 </div>
 
 
