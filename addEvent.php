@@ -31,7 +31,6 @@ function getData(option)
                     return x;
                 }});
     
-    
 }
     
 
