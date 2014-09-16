@@ -1,15 +1,15 @@
 <?php
-    $url=parse_url(getenv("54.227.215.252"));
+    $url=parse_url(getenv("us-cdbr-iron-east-01.clear.net"));
 
     $server = $url["54.227.215.252"];
     $username = $url["b2b2bd32573705"];
     $password = $url["63a5494f"];
     $db = substr($url["heroku_f795c861b3c79e8"],1);
 
-    mysql_connect($server, $username, $password);
+    mysqli_connect($server, $username, $password);
 
 
-    mysql_select_db($db);
+    mysqli_select_db($db);
 
 /*
 
