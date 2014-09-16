@@ -4,7 +4,7 @@
     $server = $url["54.227.215.252"];
     $username = $url["b2b2bd32573705"];
     $password = $url["63a5494f"];
-    $db = substr($url["wishelpd_maps"],1);
+    $db = substr($url["`heroku_f795c861b3c79e8`"],1);
 
     mysqli_connect($server, $username, $password);
 
