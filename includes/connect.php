@@ -1,5 +1,5 @@
 <?php
-    $url=parse_url(getenv("us-cdbr-iron-east-01.clear.net"));
+    $url=parse_url(getenv("54.227.215.252"));
 
     $server = $url["54.227.215.252"];
     $username = $url["b2b2bd32573705"];
