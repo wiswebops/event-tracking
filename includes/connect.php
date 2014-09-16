@@ -6,10 +6,10 @@
     $password = $url["63a5494f"];
     $db = substr($url["heroku_f795c861b3c79e8"],1);
 
-    mysqli_connect($server, $username, $password);
+    mysql_connect($server, $username, $password);
 
 
-    mysqli_select_db($db);
+    mysql_select_db($db);
 
 /*
 
