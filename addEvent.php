@@ -1,5 +1,7 @@
 <?php
 
+phpinfo();
+
 require 'includes/connect.php';
 
 require 'WizardSteps.php';
