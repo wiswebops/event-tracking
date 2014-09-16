@@ -1,17 +1,12 @@
+<?php include('head.php'); ?>
 
-
-
-
-    <div id="wrapper">
+ <div id="wrapper">
 
       <!-- Navigation -->
-     <?php include('head.php'); ?> 
-     
-      <?php include('nav.php');
-	 
-
-
-	  include('includes/functions.php');
+   <?php 
+      include('nav.php');
+  	 
+  	  include('includes/functions.php');
 	  ?>
 
 
@@ -24,11 +19,11 @@
         </div><!-- /.row -->
 
 
-         <div class="row">
+        <!-- <div class="row">
           <div class="col-lg-4">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-barcode"></i> Create New Scanner</h3>
+                <h3 class="panel-title"><i class="fa fa-barcode"></i> Create New Scanners</h3>
               </div>
               <div class="panel-body">
                 
@@ -66,13 +61,13 @@
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-            <?php
+            <?php /*
 				$query = mysql_query("SELECT DISTINCT iEventGroupID, vGroupName FROM Sessions WHERE dSessionBegin >= DATE_FORMAT( CURDATE( ) ,  '%Y-1-1' )");
 				
 				while ($row = mysql_fetch_object($query))
 				{
 					echo '<li value="'.$row->iEventGroupID.'">'.$row->vGroupName.'</li>';
-				}
+				}*/
 				
 		    ?>
              
@@ -150,14 +145,107 @@
             </div>
           </div>
 		</div>
+          <div class="col-lg-4">-->
+
+             <div class="row">
+          <div class="col-md-5">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <p class="announcement-heading"><a href="addScanner.php">Create New Scanner</a></p>
+                    
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <div class="row">
+                 <div class="col-xs-12">
+                    <p class="announcement-heading"><a href="addEvent.php">Create New Event</a></p>
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          </div>
+
+        <div class="row">
+          <div class="col-md-10 col-xs-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-clock-o"></i> Recent Events</h3>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+              <table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>HR 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 11-14, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                  <tr>
+                    <td>SuccessFactors 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 11-14, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                  <tr>
+                    <td>GRC 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 18-21, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                  <tr>
+                    <td>Financials 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 18-21, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                  <tr>
+                    <td>HANA 2014</td>
+                    <td>Orlando, FL</td>
+                    <td>March 24-27, 2014</td>
+                    <td><a href="#">Edit</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+                <div class="text-right">
+                  <a href="#">View All Events <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="col-lg-4">
             
             
-			</div><!-- /.row -->
+        </div><!-- /.row -->
 
       </div><!-- /#page-wrapper -->
 
     </div><!-- /#wrapper -->
+
+   <?php include('footer.php'); ?>
+            
+            
+
 
  <script>
 
@@ -214,8 +302,12 @@ $('#StartWizard').live('click', function(){
 		
 		
 	});
+
 									   
 									   });
+
+
+
 
 
 </script>
@@ -245,4 +337,4 @@ $('#StartWizard').live('click', function(){
              <input type="file" class="float-right" title="Search for a file to add">
           </div>
 </div>
-  <?php include('footer.php'); ?>
+  
