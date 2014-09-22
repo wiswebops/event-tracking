@@ -12,6 +12,12 @@ $('button').live('click', function(){
 
 });
 </script>
+
+<?php 
+      include('nav.php');
+  	 
+  	  include('includes/functions.php');
+	  ?>
 <div class="row">
 	<div class="col-lg-4">
 		<div class="panel panel-primary">
