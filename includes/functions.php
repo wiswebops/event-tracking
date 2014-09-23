@@ -28,7 +28,7 @@ function editUser($name, $username, $password, $email, $adminLevel, $id) {
 
 function addConfs($confID, $name, $location) {
 	//$username = $_SESSION['user'];
-	$query = mysql_query("INSERT INTO confs VALUES(null,\"$confID\", \"$name\", \"$location\")") or die(mysql_error());
+	$query = mysqli_query($connection,"INSERT INTO confs VALUES(null,\"$confID\", \"$name\", \"$location\")");
 	//header("Location: requests.php");
 }
 
@@ -62,7 +62,7 @@ function addConfs($confID, $name, $location) {
 
 function addImages($fileName, $imageName, $confID) { 
 	//$userMod = $_SESSION['user'];
-	$query = mysql_query("INSERT INTO images VALUES(null,\"$fileName\",\"$imageName\",\"$confID\")") or die(mysql_error());
+	$query = mysqli_query($connection,"INSERT INTO images VALUES(null,\"$fileName\",\"$imageName\",\"$confID\")") or die(mysql_error());
 	uploadImage();
 	//header("Location: addImages.php");
 }
@@ -142,12 +142,12 @@ function addRooms($confID, $levelID, $roomid, $name, $scannerID, $x, $y, $width,
 		if($delete == 'true')
 		{
 		   echo 'Room '.$roomid.' deleted.';
-		   $query = mysql_query("delete from rooms where ID = $roomid;") or die(mysql_error());
+		   $query = mysqli_query($connection,"delete from rooms where ID = $roomid;") or die(mysql_error());
 		}
 		else
 		{
 		   echo 'Room '.$roomid.' updated.';
-		$query = mysql_query("update rooms set confID='$confID', iLevelid=$levelID, name='$name', iScannerID=$scannerID, x=$x, y=$y, width=$width, height=$height, tSVGNode='$SVG' where ID = $roomid;") or die(mysql_error());
+		$query = mysqli_query($connection,"update rooms set confID='$confID', iLevelid=$levelID, name='$name', iScannerID=$scannerID, x=$x, y=$y, width=$width, height=$height, tSVGNode='$SVG' where ID = $roomid;") or die(mysql_error());
 		}
 	}
 	else
@@ -155,7 +155,7 @@ function addRooms($confID, $levelID, $roomid, $name, $scannerID, $x, $y, $width,
 		if($delete != 'true'){
         echo 'A new room inserted.';
         echo "INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');";
-	    $query = mysql_query("INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');") or die(mysql_error());}
+	    $query = mysqli_query($connection,"INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');") or die(mysql_error());}
 	}
 	
 	
@@ -166,12 +166,12 @@ function getRoomsByLevelID($floor_id)
 {
 	$roomarray = array();
 	
-	$query = mysql_query('select * from rooms where iLevelid = '.$floor_id) or die(mysql_error());	
+	$query = mysqli_query($connection,'select * from rooms where iLevelid = '.$floor_id) or die(mysql_error());	
 	
-	while ($row = mysql_fetch_object($query)) {
+	while ($row = mysqli_fetch_object($query)) {
     array_push($roomarray, $row);
     }
-	mysql_free_result($query);
+	mysqli_free_result($query);
 	return $roomarray;
 }
 
@@ -179,19 +179,19 @@ function save_room_2_session($roomID, $sessionID)
 {
 	/*insert or update*/
 	
-	$query = mysql_query('insert into Room_2_Sess (RoomID, SessionID) values ('.$roomID.', '.$sessionID.') on duplicate key update
-  RoomID = '.$roomID.';') or die(mysql_error());
+	$query = mysqli_query($connection,'insert into Room_2_Sess (RoomID, SessionID) values ('.$roomID.', '.$sessionID.') on duplicate key update
+  RoomID = '.$roomID.';');
 }
 
 function getSessionsByRoomIDs($RoomIDs)
 {
 	$SessionData = array();
 	echo 'select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');';
-	$query = mysql_query('select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');') or die(mysql_error());
-	while ($row = mysql_fetch_object($query)) {
+	$query = mysqli_query($connection,'select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');') or die(mysql_error());
+	while ($row = mysqli_fetch_object($query)) {
          array_push($SessionData, $row);
     }
-	mysql_free_result($query);
+	mysqli_free_result($query);
 	return $SessionData;
 }
 ?>
