@@ -3,8 +3,8 @@
 include('includes/connect.php');
 
 
-$Image = mysql_query("SELECT ID, fileName, imageName FROM images WHERE ID = ".$_POST['FloorPlanID']);
-while ($row = mysql_fetch_object($Image))
+$Image = mysqli_query($connection,"SELECT ID, fileName, imageName FROM images WHERE ID = ".$_POST['FloorPlanID']);
+while ($row = mysqli_fetch_object($Image))
 {
    $img = getimagesize($row->fileName);
     
@@ -12,5 +12,5 @@ while ($row = mysql_fetch_object($Image))
 }
 
 
-mysql_close();
+mysqli_close();
 ?>
