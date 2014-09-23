@@ -18,8 +18,8 @@ include 'includes/connect.php';
 						<th>Service Date and Time</th>
 					</tr>
 					<?php
-						$scannerQuery = mysql_query("SELECT * FROM Scanners ORDER BY dInService DESC");
-						while($scannerView = mysql_fetch_assoc($scannerQuery)) {
+						$scannerQuery = mysqli_query($connection,"SELECT * FROM Scanners ORDER BY dInService DESC");
+						while($scannerView = mysqli_fetch_assoc($scannerQuery)) {
 					?>
 					<tr>
 						<td><?php echo $scannerView['vScannerName']; ?></td>
