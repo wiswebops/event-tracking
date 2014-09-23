@@ -196,8 +196,8 @@ $(function() {
         <?php
                 	echo '<script>
 		var scannerList = [];';
-		$x = mysql_query("SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
-		while ($row = mysql_fetch_object($x))
+		$x = mysqli_query($connection,"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
+		while ($row = mysqli_fetch_object($x))
 		{
 			echo '
 			scannerList['.$row->iScannerID.']=\''.$row->vScannerName.'\';
@@ -206,9 +206,9 @@ $(function() {
 		}
 			echo '</script>';
 
-                $queryx = mysql_query("SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
+                $queryx = mysqli_query($connection,"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
                 
-                while ($row = mysql_fetch_object($queryx))
+                while ($row = mysqli_fetch_object($queryx))
                 {
                   echo '<option value="'.$row->iScannerID.'">'.$row->vScannerName.'</option>';
                 }
@@ -332,7 +332,7 @@ if(isset($_POST['process']))
    }
     
     //-------------- populate sessions ---------------------
-        $queryd = mysql_query("SELECT ID, concat(SUBSTRING(vSessionName, 1, 25),'...') as SessionNameShort, vSessionName as SessionNameFull, vSpeaker, dSessionBegin, iEventGroupID FROM Sessions where iEventGroupID = ".$result['EventID']." limit 10;");
+        $queryd = mysqli_query($connection,"SELECT ID, concat(SUBSTRING(vSessionName, 1, 25),'...') as SessionNameShort, vSessionName as SessionNameFull, vSpeaker, dSessionBegin, iEventGroupID FROM Sessions where iEventGroupID = ".$result['EventID']." limit 10;");
         
         echo '<script>';
     
