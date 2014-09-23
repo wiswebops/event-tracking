@@ -5,8 +5,8 @@ $dataArray = array();
 switch ($choice)
 {
     case 1:
-        $query = mysql_query("SELECT ID, ImageName, fileName FROM images");
-        while ($row = mysql_fetch_object($query))
+        $query = mysqli_query($connection,"SELECT ID, ImageName, fileName FROM images");
+        while ($row = mysqli_fetch_object($query))
             $dataArray[$row->ID]=$row->ImageName;
     break;
     
