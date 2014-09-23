@@ -11,7 +11,7 @@ $targetPath = "FloorPlanImages/".$ImageName.'.'.$fileInfo;
 
 if($imageOverride=='on')
 {
-    $query = mysql_query("INSERT INTO images(fileName, imageName) VALUES ('$targetPath','$ImageName') on Duplicate Key update fileName='$targetPath'");
+    $query = mysqli_query($connection, "INSERT INTO images(fileName, imageName) VALUES ('$targetPath','$ImageName') on Duplicate Key update fileName='$targetPath'");
     
     //overwrite file
     if(move_uploaded_file($ImageFile, $targetPath))
@@ -22,9 +22,9 @@ if($imageOverride=='on')
 else
 {
     //ignore if exists
-    $query = mysql_query("INSERT IGNORE INTO images(fileName, imageName) VALUES ('$targetPath','$ImageName');");
+    $query = mysqli_query($connection,"INSERT IGNORE INTO images(fileName, imageName) VALUES ('$targetPath','$ImageName');");
     //upload if not exists
-    if(mysql_affected_rows()>0 )
+    if(mysqli_affected_rows()>0 )
     {
         if(move_uploaded_file($_FILES['ImagePath']['tmp_name'], $targetPath))
         echo "file uploaded successfully!";
