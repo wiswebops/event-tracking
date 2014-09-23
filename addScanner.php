@@ -31,8 +31,8 @@ $('button').live('click', function(){
                     <select name="ConfID" type="text" class="form-control" required autofocus>
                     <?php
                           echo '<option class="form-control" value = "-1" disabled">Select a Conference</option>';                          
-                          $query = mysql_query("SELECT ID, name FROM confs");
-		                  while ($row = mysql_fetch_object($query))
+                          $query = mysqli_query($connection,"SELECT ID, name FROM confs");
+		                  while ($row = mysqli_fetch_object($query))
 			              echo '<option value="'.$row->ID.'" >'.$row->name.'</option>';
                     ?>
                     </select>
