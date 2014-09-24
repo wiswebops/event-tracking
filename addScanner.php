@@ -1,6 +1,9 @@
 <?php 
-include('head.php');
 include 'includes/connect.php';
+include 'head.php' ;
+ include 'nav.php' ;
+
+//include 'includes/functions.php';
 ?> 
 <script>
 $('button').live('click', function(){
@@ -14,9 +17,9 @@ $('button').live('click', function(){
 </script>
 
 <?php 
-      include('nav.php');
+     
   	 
-  	  include('includes/functions.php');
+  
 	  ?>
 <div class="row">
 	<div class="col-lg-4">
