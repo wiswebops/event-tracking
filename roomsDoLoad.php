@@ -9,7 +9,7 @@ $floor_id = $_POST['level_id'];
 $Rooms = getRoomsByLevelID($floor_id);
 echo json_encode($Rooms);
 unset($Rooms);
-mysql_close();
+
 return;
 
 if(isset($_POST['submit'])) {

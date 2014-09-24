@@ -18,7 +18,7 @@ include 'includes/connect.php';
 						<th>Service Date and Time</th>
 					</tr>
 					<?php
-						$scannerQuery = mysqli_query($connection,"SELECT * FROM Scanners ORDER BY dInService DESC");
+						$scannerQuery = mysqli_query(Database::getConnection(),"SELECT * FROM Scanners ORDER BY dInService DESC");
 						while($scannerView = mysqli_fetch_assoc($scannerQuery)) {
 					?>
 					<tr>

@@ -1,20 +1,23 @@
 <?php
 
 
+
 function Event_Create (){
  $eventData = $_POST;
     //var_dump ($eventData);
     //return array("status"=>"Success", "EventID"=>$eventData["EventGroupID"]);
-    echo 'haha';
+    //GLOBAL $db;
     //$check_exist1 = mysql_query("SELECT * FROM FloorLevel WHERE iEventID = ".$eventData["EventGroupID"]);
-    $check_exist2 = mysqli_query($connection,"SELECT * FROM confs WHERE iEventGroupID = ".$eventData["EventGroupID"]);
+    $check_exist2 = mysqli_query(Database::getConnection(),"SELECT * FROM confs WHERE iEventGroupID = ".$eventData["EventGroupID"]);
     if(mysqli_num_rows($check_exist2) == 0)
     {
-        mysqli_query($connection,"Insert into confs (confID, name, location, date, dCreated, dLastUpdate, ieventGroupID) values ('".$eventData["confID"]."','".$eventData["EventName"]."','".$eventData["EventLocation"]."','".$eventData["EventDate"]."', NOW(), NOW(),".$eventData["EventGroupID"].");");
+        mysqli_query(Database::getConnection(),"Insert into confs (confID, name, location, date, dCreated, dLastUpdate, ieventGroupID) values ('".$eventData["confID"]."','".$eventData["EventName"]."','".$eventData["EventLocation"]."','".$eventData["EventDate"]."', NOW(), NOW(),".$eventData["EventGroupID"].");");
+        
 
     }
     else
     {
+        
         return array("status"=>"Fail", "message"=>"This event has already been entered!");   
     }
     return array("status"=>"Success", "EventID"=>$eventData["EventGroupID"]);
@@ -26,7 +29,7 @@ function Content_Upload (){
    
       //return array("status"=>"Success", "EventID"=>$eventData["ConferenceID"]); 
     
-	 $eventQuery = mysqli_query($connection,"SELECT * FROM confs WHERE iEventGroupID = ".$eventData["ConferenceID"]);
+	 $eventQuery = mysqli_query(Database::getConnection(),"SELECT * FROM confs WHERE iEventGroupID = ".$eventData["ConferenceID"]);
    
 	if (mysqli_num_rows($eventQuery) != 1)
     {
@@ -37,7 +40,7 @@ function Content_Upload (){
         $event = mysqli_fetch_object($eventQuery);
     }
    
-    $check_exist1 = mysqli_query($connection,"SELECT * FROM FloorLevel WHERE iEventID = ".$eventData["ConferenceID"]);
+    $check_exist1 = mysqli_query(Database::getConnection(),"SELECT * FROM FloorLevel WHERE iEventID = ".$eventData["ConferenceID"]);
 
     if(mysqli_num_rows($check_exist1) == 0)
     {
@@ -47,11 +50,11 @@ function Content_Upload (){
 			 $mapQuery = "Insert into FloorLevel (iEventID, iMapID, vLevelName, dLastUpdated) Select * from (Select ".$eventData["ConferenceID"].",".$eventData["Floorplans"][$i].",'".$event->name." Map ".($i+1)."', NOW()) AS TMP WHERE NOT EXISTS (SELECT * FROM FloorLevel  WHERE (iEventID= ".$eventData["ConferenceID"]." and iMapID = ".$eventData["Floorplans"][$i].") or vLevelName = '".$event->name." Map ".($i+1)."') LIMIT 1; ";
            // echo $mapQuery;
             
-			mysqli_query($connection,$mapQuery);
+			mysqli_query(Database::getConnection(),$mapQuery);
 		}
           $floorPlanArray['new'] = array();
             $floorPlanArray['processed'] = array();
-            $floorplanQuery=mysqli_query($connection,"Select ID, iMapID, vLevelName from FloorLevel where iEventID =".$eventData['ConferenceID']." order by ID");
+            $floorplanQuery=mysqli_query(Database::getConnection(),"Select ID, iMapID, vLevelName from FloorLevel where iEventID =".$eventData['ConferenceID']." order by ID");
        
             while ($fp = mysqli_fetch_object($floorplanQuery))
                array_push($floorPlanArray['new'],array("FloorID"=>$fp->ID, "MapID"=>$fp->iMapID, "LevelName"=>$fp->vLevelName));
@@ -78,7 +81,7 @@ function getTopMap (&$arrayIn_from, &$arrayIn_to, $addIn)
 {
     $getMapID = array_shift($arrayIn_from);
     array_push($arrayIn_to,$getMapID);
-    $MapObject  = mysqli_fetch_array(mysqli_query($connection,"Select * from images where ID =".$getMapID['MapID']));
+    $MapObject  = mysqli_fetch_array(mysqli_query(Database::getConnection(),"Select * from images where ID =".$getMapID['MapID']));
     return array_merge($addIn, array("currentFloorID"=>$getMapID['FloorID'], "currentFloorMap"=>$MapObject ));
 }
 
@@ -90,8 +93,8 @@ function Create_Rooms ()
     $eventData = $_POST;
     //var_dump ($_POST);
     $floorInfoArray = json_decode(stripslashes($_POST['FloorLevel']),true);
-    $getMapID=mysqli_fetch_array(mysqli_query($connection,"Select iMapID from FloorLevel where ID =".$eventData['currentFloorID']));
-    $MapObject  = mysqli_fetch_array(mysqli_query($connection,"Select * from images where ID =".$getMapID['iMapID']));
+    $getMapID=mysqli_fetch_array(mysqli_query(Database::getConnection(),"Select iMapID from FloorLevel where ID =".$eventData['currentFloorID']));
+    $MapObject  = mysqli_fetch_array(mysqli_query(Database::getConnection(),"Select * from images where ID =".$getMapID['iMapID']));
     return array("status"=>"Success", "EventID"=>$eventData["ConferenceID"], "FloorLevel"=>$floorInfoArray, "currentFloorID"=>$eventData['currentFloorID'], "currentFloorMap"=>$MapObject);
     /*
     $getMapID = array_shift($_POST['FloorLevel']);
@@ -109,15 +112,14 @@ function Final_Review()
 }
 
 
-
 //fill up options for event 
 $EventGroup = array();
 $FloorPlans = array();
-$query = mysqli_query($connection,"SELECT DISTINCT iEventGroupID, vGroupName FROM Sessions WHERE dSessionBegin >= DATE_FORMAT( CURDATE( ) ,  '%Y-1-1' )");
+$query = mysqli_query(Database::getConnection(),"SELECT DISTINCT iEventGroupID, vGroupName FROM Sessions WHERE dSessionBegin >= DATE_FORMAT( CURDATE( ) ,  '%Y-1-1' )");
 while ($row = mysqli_fetch_object($query))
    $EventGroup[$row->iEventGroupID]=$row->vGroupName;
 
-$query = mysqli_query($connection, "SELECT ID, ImageName, fileName FROM images");
+$query = mysqli_query(Database::getConnection(), "SELECT ID, ImageName, fileName FROM images");
 while ($row = mysqli_fetch_object($query))
    $FloorPlans[$row->ID]=$row->ImageName;
 

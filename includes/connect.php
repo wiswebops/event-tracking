@@ -1,8 +1,25 @@
 <?php
-define('DB_HOST','54.227.215.252');
-define('DB_USER','b2b2bd32573705');
-define('DB_PASS','63a5494f');
-define('DB_NAME','heroku_f795c861b3c79e8');
-$connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS) or die(mysql_error());
-mysqli_select_db($connection, DB_NAME) or die(mysql_error());
+class Database {
+    private $connection;
+    
+    private function __construct() {
+        $this->connection = mysqli_connect('54.227.215.252','b2b2bd32573705','63a5494f');
+        mysqli_select_db($this->connection, 'heroku_f795c861b3c79e8');
+    }
+
+    
+    function __destruct() {
+        mysqli_close($this->connection);
+    }
+    
+    public static function getConnection() {
+        static $databasez = null;
+        if($databasez === null) {
+            $databasez = new Database();
+        }
+        return $databasez->connection;
+    }
+}
+
+
 ?>

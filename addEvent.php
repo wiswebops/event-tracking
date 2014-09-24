@@ -1,15 +1,15 @@
 <?php
 
+//error_reporting(0);
 
+include 'includes/connect.php';
 
-require 'includes/connect.php';
+include 'WizardSteps.php';
 
-require 'WizardSteps.php';
-
-require 'WizardClass.php';
+include 'WizardClass.php';
 
 ob_start();
-require 'SketchBook_Setup.php';
+include 'SketchBook_Setup.php';
 
 ?>
 <html>
@@ -42,8 +42,9 @@ function AjaxImageByID (imageID)
     
     $.fancybox({
 		type : 'ajax',
-		href : 'getImage.php',
-		ajax : { type : 'POST', data: {FloorPlanID: imageID }}
+		href : 'getImage.php?token='+Date.now(),
+        
+		ajax : { cache: true, type : 'POST', data: {FloorPlanID: imageID}}
 	});   
 }
    $("#btnUpload").live('click',function(){
@@ -78,7 +79,7 @@ $(function() {
     $( ".Previewable" ).after("<input type='button' class='Preview' style=' vertical-align:top;background:url(images/preview.png) no-repeat;border:none;width:25px;height:25px'/>");
     $(".Remove").live('click', function(){
         
-        $(this).parents('tr').remove();
+        $(this).parents('tr:first').remove();
        
     });
     
@@ -119,7 +120,6 @@ $(function() {
              $('button[name=next]').live('click',function(e){
        
        
-            alert('ahah');
         var ParentForm = $(this).parents('form');
         Sessions_Save(cur_event,cur_floor,function(){ParentForm.submit();});
     
@@ -196,7 +196,7 @@ $(function() {
         <?php
                 	echo '<script>
 		var scannerList = [];';
-		$x = mysqli_query($connection,"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
+		$x = mysqli_query(Database::getConnection(),"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
 		while ($row = mysqli_fetch_object($x))
 		{
 			echo '
@@ -206,7 +206,7 @@ $(function() {
 		}
 			echo '</script>';
 
-                $queryx = mysqli_query($connection,"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
+                $queryx = mysqli_query(Database::getConnection(),"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
                 
                 while ($row = mysqli_fetch_object($queryx))
                 {
@@ -275,7 +275,7 @@ $(function() {
 //for testing
 
 //-------------- initiate wizard object ---------------------
-$testobj = new Wizard($steps_create, isset($_POST['next'])?$_POST['next']:null, 'http://www.google.com');
+$testobj = new Wizard($steps_create, isset($_POST['next'])?$_POST['next']:null, 'dashboard.php');
 //-------------- initiate result array ---------------------
 
 
@@ -298,7 +298,7 @@ if(isset($_POST['process']))
     $testobj->setIdentifier($result['EventID']);
    if(array_key_exists('currentFloorMap', $result))
    {
-        echo '<script>$(function() {$(".hasSVG").css("background-image","url('.$result['currentFloorMap']['fileName'].')");});
+        echo '<script>$(function() {$(".hasSVG").css("background-image","url(\''.$result['currentFloorMap']['fileName'].'\')");});
         cur_event = '.$result['EventID'].';
         cur_floor = '.$result['currentFloorID'].';
         $("form").append(\'<input name="currentFloorID" type="hidden" value="'.$result['currentFloorID'].'"/>\');';
@@ -332,11 +332,11 @@ if(isset($_POST['process']))
    }
     
     //-------------- populate sessions ---------------------
-        $queryd = mysqli_query($connection,"SELECT ID, concat(SUBSTRING(vSessionName, 1, 25),'...') as SessionNameShort, vSessionName as SessionNameFull, vSpeaker, dSessionBegin, iEventGroupID FROM Sessions where iEventGroupID = ".$result['EventID']." limit 10;");
+        $queryd = mysqli_query(Database::getConnection(),"SELECT ID, concat(SUBSTRING(vSessionName, 1, 25),'...') as SessionNameShort, vSessionName as SessionNameFull, vSpeaker, dSessionBegin, iEventGroupID FROM Sessions where iEventGroupID = ".$result['EventID']." limit 10;");
         
         echo '<script>';
     
-        while ($row = mysql_fetch_object($queryd))
+        while ($row = mysqli_fetch_object($queryd))
 		{
 			$fullInfo = $row->SessionNameFull." | ".$row->vSpeaker." | ".$row->dSessionBegin;
                 echo '$("#catalog ul").append("<li value=\"'.$row->ID.'\" title=\"'.$fullInfo.'\" >'.$row->SessionNameShort.'</li>");';
