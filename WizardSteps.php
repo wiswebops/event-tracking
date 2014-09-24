@@ -5,7 +5,7 @@ function Event_Create (){
  $eventData = $_POST;
     //var_dump ($eventData);
     //return array("status"=>"Success", "EventID"=>$eventData["EventGroupID"]);
-
+    echo 'haha';
     //$check_exist1 = mysql_query("SELECT * FROM FloorLevel WHERE iEventID = ".$eventData["EventGroupID"]);
     $check_exist2 = mysqli_query($connection,"SELECT * FROM confs WHERE iEventGroupID = ".$eventData["EventGroupID"]);
     if(mysqli_num_rows($check_exist2) == 0)
