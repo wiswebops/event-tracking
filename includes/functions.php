@@ -132,6 +132,20 @@ function uploadImage() {
 } */
 
 
+function getRoomDetail($confID)
+{
+    
+    $ConfData = array();
+	$query = mysqli_query(Database::getConnection(),"select a.*, b.vGroupName from confs a inner join (SELECT DISTINCT iEventGroupID, vGroupName FROM Sessions WHERE dSessionBegin >= DATE_FORMAT( CURDATE( ) ,  '%Y-1-1' )) b on a.iEventGroupID = b.iEventGroupID where ID = $confID");
+	while ($row = mysqli_fetch_object($query)) {
+         array_push($ConfData, $row);
+    }
+	mysqli_free_result($query);
+	return $ConfData;
+   
+    
+}
+
 // Add rooms function
 
 function addRooms($confID, $levelID, $roomid, $name, $scannerID, $x, $y, $width, $height, $SVG, $delete) {
@@ -142,12 +156,12 @@ function addRooms($confID, $levelID, $roomid, $name, $scannerID, $x, $y, $width,
 		if($delete == 'true')
 		{
 		   echo 'Room '.$roomid.' deleted.';
-		   $query = mysqli_query(Database::getConnection(),"delete from rooms where ID = $roomid;") or die(mysql_error());
+		   $query = mysqli_query(Database::getConnection(),"delete from rooms where ID = $roomid;") ;
 		}
 		else
 		{
 		   echo 'Room '.$roomid.' updated.';
-		$query = mysqli_query(Database::getConnection(),"update rooms set confID='$confID', iLevelid=$levelID, name='$name', iScannerID=$scannerID, x=$x, y=$y, width=$width, height=$height, tSVGNode='$SVG' where ID = $roomid;") or die(mysql_error());
+		$query = mysqli_query(Database::getConnection(),"update rooms set confID='$confID', iLevelid=$levelID, name='$name', iScannerID=$scannerID, x=$x, y=$y, width=$width, height=$height, tSVGNode='$SVG' where ID = $roomid;");
 		}
 	}
 	else
@@ -155,7 +169,7 @@ function addRooms($confID, $levelID, $roomid, $name, $scannerID, $x, $y, $width,
 		if($delete != 'true'){
         echo 'A new room inserted.';
         echo "INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');";
-	    $query = mysqli_query(Database::getConnection(),"INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');") or die(mysql_error());}
+	    $query = mysqli_query(Database::getConnection(),"INSERT INTO rooms (confID, iLevelid, name, iScannerID, x, y, width, height, tSVGNode) VALUES ($confID, $levelID, \"$name\", \"$scannerID\", \"$x\", \"$y\", \"$width\", \"$height\", '$SVG');") ;}
 	}
 	
 	
@@ -186,7 +200,7 @@ function save_room_2_session($roomID, $sessionID)
 function getSessionsByRoomIDs($RoomIDs)
 {
 	$SessionData = array();
-	echo 'select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');';
+	//echo 'select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');';
 	$query = mysqli_query(Database::getConnection(),'select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');');
 	while ($row = mysqli_fetch_object($query)) {
          array_push($SessionData, $row);

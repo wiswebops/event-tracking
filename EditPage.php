@@ -200,11 +200,29 @@ $(function() {
 //for testing
 
 //-------------- initiate wizard object ---------------------
-$testobj = new Wizard($steps_edit_main, isset($_POST['next'])?$_POST['next']:null, 'http://www.google.com');
+$testobj = new Wizard($steps_edit_floors, isset($_POST['next'])?$_POST['next']:null, '#');
 //-------------- initiate result array ---------------------
 
+var_dump($_POST);
 
+$floorID = 11;
+$FloorInfo = mysqli_fetch_object(mysqli_query(Database::getConnection(), 'select * from floorlevel a inner join images b on a.iMapID = b.ID where a.ID ='.$floorID));
 
+var_dump($FloorInfo);
+echo '<script>';
+if($FloorInfo!=null)
+{
+    echo '$(document).ready(function(){$("[name=Floorplans]").val("'.$FloorInfo->iMapID.'");});';
+    
+}
+else
+{
+    
+    
+}
+echo '</script>';
+
+$results= array();
 if(!$testobj->checkCompleted())
 {
     ob_end_flush();
