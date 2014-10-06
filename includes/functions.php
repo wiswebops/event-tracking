@@ -201,7 +201,7 @@ function getSessionsByRoomIDs($RoomIDs)
 {
 	$SessionData = array();
 	//echo 'select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');';
-	$query = mysqli_query(Database::getConnection(),'select RoomID, SessionID from  vw_session_room where RoomID in ('.$RoomIDs.');');
+	$query = mysqli_query(Database::getConnection(),'select RoomID, SessionID from  room_2_sess where RoomID in ('.$RoomIDs.');');
 	while ($row = mysqli_fetch_object($query)) {
          array_push($SessionData, $row);
     }

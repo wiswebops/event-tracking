@@ -78,12 +78,42 @@ function Content_Upload (){
 }
 
 
+function Create_Rooms_edit()
+{
+    
+   
+   
+}
+
+
 function Content_Upload_edit()
 {
     
-    
-    
-    
+    //update floorplan
+    $arg = func_get_args()[0];
+    var_dump($arg);
+    $FloorID= $arg[0];
+    $EventID= $arg[1];
+    $MapID= $arg[2];
+    $returnData=null;
+    if($FloorID == null)
+    {
+        //add new
+      
+        mysqli_query(Database::getConnection(),"Insert into floorlevel (iEventID, iMapID, dLastUpdated) VALUES (".$EventID.",".$MapID.",Now());");
+        $returnData = mysqli_insert_id(Database::getConnection());
+        //if ($returnData == null)
+          // header("location: http://google.com");
+    }
+    else
+    {
+        echo "update floorlevel set iMapID = ".$MapID.", dLastUpdated = Now() where ID = ".$FloorID;
+        mysqli_query(Database::getConnection(),"update floorlevel set iMapID = ".$MapID.", dLastUpdated = Now() where ID = ".$FloorID);
+        //update   
+        
+    }
+    return $returnData;
+   
 }
 
 
