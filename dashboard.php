@@ -193,41 +193,24 @@
                   </tr>
                 </thead>
                 <tbody>
+                 <?php
+					$queryConfs = mysqli_query(Database::getConnection(),"SELECT * FROM confs ORDER BY dlastupdate desc limit 2");
+						while($confs = mysqli_fetch_assoc($queryConfs)) {
+				 ?>
                   <tr>
-                    <td>HR 2014</td>
-                    <td>Orlando, FL</td>
-                    <td>March 11-14, 2014</td>
-                    <td><a href="#">Edit</a></td>
+                    <td><?php echo $confs['name']; ?></td>
+                    <td><?php echo $confs['location']; ?></td>
+                    <td><?php echo $confs['date']; ?></td>
+                    <td><a onclick="openEditWizard(<?php echo $confs['ID']; ?>);">Edit</a></td>
                   </tr>
-                  <tr>
-                    <td>SuccessFactors 2014</td>
-                    <td>Orlando, FL</td>
-                    <td>March 11-14, 2014</td>
-                    <td><a href="#">Edit</a></td>
-                  </tr>
-                  <tr>
-                    <td>GRC 2014</td>
-                    <td>Orlando, FL</td>
-                    <td>March 18-21, 2014</td>
-                    <td><a href="#">Edit</a></td>
-                  </tr>
-                  <tr>
-                    <td>Financials 2014</td>
-                    <td>Orlando, FL</td>
-                    <td>March 18-21, 2014</td>
-                    <td><a href="#">Edit</a></td>
-                  </tr>
-                  <tr>
-                    <td>HANA 2014</td>
-                    <td>Orlando, FL</td>
-                    <td>March 24-27, 2014</td>
-                    <td><a href="#">Edit</a></td>
-                  </tr>
+				  <?php 
+					}
+				?>
                 </tbody>
               </table>
             </div>
                 <div class="text-right">
-                  <a href="#">View All Events <i class="fa fa-arrow-circle-right"></i></a>
+                  <a href="events.php">View All Events <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
             </div>

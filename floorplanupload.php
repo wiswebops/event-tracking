@@ -24,7 +24,7 @@ else
     //ignore if exists
     $query = mysqli_query(Database::getConnection(),"INSERT IGNORE INTO images(fileName, imageName) VALUES ('$targetPath','$ImageName');");
     //upload if not exists
-    if(mysqli_affected_rows()>0 )
+    if(mysqli_affected_rows(Database::getConnection())>0 )
     {
         if(move_uploaded_file($_FILES['ImagePath']['tmp_name'], $targetPath))
         echo "file uploaded successfully!";

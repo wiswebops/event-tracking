@@ -20,21 +20,7 @@ include 'SketchBook_Setup.php';
 var cur_floor;
 var cur_event;
     
-function getData(option)
-{
-    var datax;
-    return $.ajax({
-           		type: "POST",
-          		url: "DataRetrieve.php",
-           	    data: {choice: option},
-		        cache: false,
-				dataType: "json",
-		        success: function(x){
-                    return x;
-                }});
-    
-}
-    
+
 
     
 function AjaxImageByID (imageID)
@@ -196,7 +182,7 @@ $(function() {
         <?php
                 	echo '<script>
 		var scannerList = [];';
-		$x = mysqli_query(Database::getConnection(),"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");
+		$x = mysqli_query(Database::getConnection(),"SELECT vScannerName, iScannerID FROM Scanners a inner join scanner_2_conf b on a.iScannerID = b.scanner_id where b.conf_id = ".$result['EventID']." ORDER BY iScannerID ASC");
 		while ($row = mysqli_fetch_object($x))
 		{
 			echo '
@@ -332,7 +318,7 @@ if(isset($_POST['process']))
    }
     
     //-------------- populate sessions ---------------------
-        $queryd = mysqli_query(Database::getConnection(),"SELECT ID, concat(SUBSTRING(vSessionName, 1, 25),'...') as SessionNameShort, vSessionName as SessionNameFull, vSpeaker, dSessionBegin, iEventGroupID FROM Sessions where iEventGroupID = ".$result['EventID']." limit 10;");
+        $queryd = mysqli_query(Database::getConnection(),"SELECT ID, concat(SUBSTRING(vSessionName, 1, 25),'...') as SessionNameShort, vSessionName as SessionNameFull, vSpeaker, dSessionBegin, iEventGroupID FROM (select * from sessions where iEventGroupID = ".$result['EventID']." limit 10) a left join room_2_sess b on (a.ID = b.SessionID) where b.RoomID is null;");
         
         echo '<script>';
     
@@ -347,7 +333,7 @@ if(isset($_POST['process']))
    
 }
 
-if(!$testobj->checkCompleted())
+if(!$testobj->checkCompleted(false))
 {
     ob_end_flush();
     if (sizeof($result['FloorLevel']['new'])>0 && $testobj->getCurrectStep()=='Review')

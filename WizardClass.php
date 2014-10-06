@@ -44,9 +44,9 @@ Class Wizard{
         return $this->Identifier;
     }
     
-    public function checkCompleted ()
+    public function checkCompleted ($bredirect)
     {
-        return ($this->CurrentStep == 'complete' && $this->onCompleted != null) ? header('Location: '.$this->onCompleted) :  false;  
+        return ($this->CurrentStep == 'complete' && $this->onCompleted != null) ? ($bredirect ? true : header('Location: '.$this->onCompleted)) :  false;  
     }
             
         
