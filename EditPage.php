@@ -13,7 +13,11 @@ require 'SketchBook_Setup.php';
 <html>
 <head>
 <meta charset="utf-8">
-
+<script>
+  function preventBack(){window.history.forward();}
+  setTimeout("preventBack()", 0);
+  window.onunload=function(){null};
+</script>
 <script>
 var cur_floor;
 var cur_event;
@@ -282,8 +286,17 @@ if(isset($_POST['process']))
 {
     $callback=preg_replace('/\s+/', "",$_POST['process']);
     $result=call_user_func($callback, array($floorID,$EventID,$FloorPlanID));
-    if($floorID == null && $result != null)
+    if($result == -1)
+    {
+        
+        echo "<script> parent.location.assign('Error.php?error_code=2'); </script>";
+    
+    }    
+    else{
+        
+        if ($floorID == null && $result != null)
         $floorID = $result;
+    }
 }
 
 

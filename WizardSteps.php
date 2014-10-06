@@ -102,8 +102,9 @@ function Content_Upload_edit()
       
         mysqli_query(Database::getConnection(),"Insert into floorlevel (iEventID, iMapID, dLastUpdated) VALUES (".$EventID.",".$MapID.",Now());");
         $returnData = mysqli_insert_id(Database::getConnection());
-        //if ($returnData == null)
-          // header("location: http://google.com");
+       
+        if ($returnData == 0)
+          $returnData = -1;
     }
     else
     {

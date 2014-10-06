@@ -367,7 +367,7 @@ $('#popupconfirm').live('click',function(){
 function viewPadClick(event)
 {
 	//offset = ($.browser.msie ? {left: 0, top: 0} : $('#svgView').offset()); 
-	 
+	
 	//offseted_X =event.clientX-offset.left
     //offseted_Y =event.clientY-offset.top;
 	currentNode = $(this);

@@ -16,6 +16,10 @@ switch($_GET['error_code'])
  case 1:
     echo 'SQL Error Occured while updating';
  break;
+    
+ case 2:
+    echo 'This floor plan has already been used for this event group, please use a different image.';
+ break;
 
 
 }

@@ -15,7 +15,11 @@ include 'SketchBook_Setup.php';
 <html>
 <head>
 <meta charset="utf-8">
-
+<script>
+  function preventBack(){window.history.forward();}
+  setTimeout("preventBack()", 0);
+  window.onunload=function(){null};
+</script>
 <script>
 var cur_floor;
 var cur_event;
@@ -179,16 +183,19 @@ $(function() {
         <td>
         <select name='scannerid'>
         <option>Select Scanner</option>
+            
         <?php
+
                 	echo '<script>
+                    
 		var scannerList = [];';
-		$x = mysqli_query(Database::getConnection(),"SELECT vScannerName, iScannerID FROM Scanners a inner join scanner_2_conf b on a.iScannerID = b.scanner_id where b.conf_id = ".$result['EventID']." ORDER BY iScannerID ASC");
-		while ($row = mysqli_fetch_object($x))
+//echo "console.log('SELECT vScannerName, iScannerID FROM Scanners a inner join scanner_2_conf b on a.iScannerID = b.scanner_id where b.conf_id = ".$result['EventID']." ORDER BY iScannerID ASC');";
+$x = mysqli_query(Database::getConnection(),"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");		
+while ($row = mysqli_fetch_object($x))
+		
+         
 		{
-			echo '
-			scannerList['.$row->iScannerID.']=\''.$row->vScannerName.'\';
-			
-			';
+			echo 'scannerList['.$row->iScannerID.']=\''.$row->vScannerName.'\';';
 		}
 			echo '</script>';
 
