@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(isset($_SESSION['user'])) {
+?>
+
 <?php 
 include 'includes/connect.php';
 include 'head.php' ;
@@ -16,11 +21,12 @@ $('button').live('click', function(){
 });
 </script>
 
-<?php 
-     
-  	 
-  
-	  ?>
+
+<div id="wrapper">
+<div id="page-wrapper">
+<?php
+		echo $_SESSION['user'];
+		?>
 <div class="row">
 	<div class="col-lg-4">
 		<div class="panel panel-primary">
@@ -34,9 +40,9 @@ $('button').live('click', function(){
                     <select name="ConfID" type="text" class="form-control" required autofocus>
                     <?php
                           echo '<option class="form-control" value = "-1" disabled">Select a Conference</option>';                          
-                          $query = mysqli_query(Database::getConnection(),"SELECT ID, name FROM confs");
+                          $query = mysqli_query(Database::getConnection(),"SELECT DISTINCT iEventGroupID, vGroupName FROM Sessions WHERE dSessionBegin >= DATE_FORMAT( CURDATE( ) ,  '%Y-1-1' )");
 		                  while ($row = mysqli_fetch_object($query))
-			              echo '<option value="'.$row->ID.'" >'.$row->name.'</option>';
+			              echo '<option value="'.$row->iEventGroupID.'" >'.$row->vGroupName.'</option>';
                     ?>
                     </select>
 					
@@ -55,3 +61,10 @@ $('button').live('click', function(){
 		</div>
 	</div>
 </div>
+</div>
+</div>
+<?php
+} else {
+	header("location: login.php");
+}
+?>

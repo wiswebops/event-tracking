@@ -1,9 +1,16 @@
+<?php
+session_start();
+if(isset($_SESSION['user'])) {
+?>
 
 
 <?php include('head.php'); ?>
 <?php include('includes/functions.php'); ?>
-    <div id="wrapper">
+<div id="wrapper">
 
+        
+
+        
       <!-- Navigation -->
       
         <?php include('nav.php'); ?>
@@ -34,14 +41,14 @@
                 </thead>
                 <tbody>
 				<?php
-					$queryConfs = mysql_query("SELECT * FROM confs ORDER BY name ASC");
-						while($confs = mysql_fetch_assoc($queryConfs)) {
+					$queryConfs = mysqli_query(Database::getConnection(),"SELECT * FROM confs ORDER BY name ASC");
+						while($confs = mysqli_fetch_assoc($queryConfs)) {
 				?>
                   <tr>
                     <td><?php echo $confs['name']; ?></td>
                     <td><?php echo $confs['location']; ?></td>
                     <td><?php echo $confs['date']; ?></td>
-                    <td><a href="#">Edit</a></td>
+                    <td><a onclick="openEditWizard(<?php echo $confs['ID']; ?>);">Edit</a></td>
                   </tr>
 				  <?php 
 					}
@@ -107,3 +114,9 @@
     </div><!-- /#wrapper -->
 
    <?php include('footer.php'); ?>
+   
+<?php
+} else {
+	header("location: login.php");
+}
+?>
