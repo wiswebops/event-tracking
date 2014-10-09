@@ -17,9 +17,7 @@ if(isset($_SESSION['user'])) {
       <div id="page-wrapper">
 
         <div class="row">
-		<?php
-		echo $_SESSION['user'];
-		?>
+		
           <div class="col-lg-12">
             <h1>Dashboard</h1>
           </div>

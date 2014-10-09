@@ -194,16 +194,16 @@ $(function() {
                 	echo '<script>
                     
 		var scannerList = [];';
-<<<<<<< HEAD
+
 		$x = mysqli_query(Database::getConnection(),"SELECT vScannerName, iScannerID FROM Scanners a inner join scanner_2_conf b on a.iScannerID = b.scanner_id where b.conf_id = ".$result['EventID']." ORDER BY iScannerID ASC");
 		while ($row = mysqli_fetch_object($x))
-=======
+
 //echo "console.log('SELECT vScannerName, iScannerID FROM Scanners a inner join scanner_2_conf b on a.iScannerID = b.scanner_id where b.conf_id = ".$result['EventID']." ORDER BY iScannerID ASC');";
 $x = mysqli_query(Database::getConnection(),"SELECT vScannerName, iScannerID FROM Scanners ORDER BY iScannerID ASC");		
 while ($row = mysqli_fetch_object($x))
 		
          
->>>>>>> master
+
 		{
 			echo 'scannerList['.$row->iScannerID.']=\''.$row->vScannerName.'\';';
 		}
