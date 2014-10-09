@@ -21,12 +21,22 @@ $('button').live('click', function(){
 });
 </script>
 
+<<<<<<< HEAD
 
 <div id="wrapper">
 <div id="page-wrapper">
 <?php
 		echo $_SESSION['user'];
 		?>
+=======
+<?php 
+     
+  	 
+  
+	  ?>
+
+      <div id="page-wrapper">
+>>>>>>> master
 <div class="row">
 	<div class="col-lg-4">
 		<div class="panel panel-primary">
@@ -62,9 +72,12 @@ $('button').live('click', function(){
 	</div>
 </div>
 </div>
+<<<<<<< HEAD
 </div>
 <?php
 } else {
 	header("location: login.php");
 }
 ?>
+=======
+>>>>>>> master

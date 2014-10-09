@@ -77,6 +77,47 @@ function Content_Upload (){
 	
 }
 
+
+function Create_Rooms_edit()
+{
+    
+   
+   
+}
+
+
+function Content_Upload_edit()
+{
+    
+    //update floorplan
+    $arg = func_get_args()[0];
+    var_dump($arg);
+    $FloorID= $arg[0];
+    $EventID= $arg[1];
+    $MapID= $arg[2];
+    $returnData=null;
+    if($FloorID == null)
+    {
+        //add new
+      
+        mysqli_query(Database::getConnection(),"Insert into floorlevel (iEventID, iMapID, dLastUpdated) VALUES (".$EventID.",".$MapID.",Now());");
+        $returnData = mysqli_insert_id(Database::getConnection());
+       
+        if ($returnData == 0)
+          $returnData = -1;
+    }
+    else
+    {
+        echo "update floorlevel set iMapID = ".$MapID.", dLastUpdated = Now() where ID = ".$FloorID;
+        mysqli_query(Database::getConnection(),"update floorlevel set iMapID = ".$MapID.", dLastUpdated = Now() where ID = ".$FloorID);
+        //update   
+        
+    }
+    return $returnData;
+   
+}
+
+
 function getTopMap (&$arrayIn_from, &$arrayIn_to, $addIn)
 {
     $getMapID = array_shift($arrayIn_from);
@@ -151,44 +192,26 @@ $steps_create = array(
     "PageConfig"=>array("ProcessMethod"=>"Final_Review"))
 );
 
-$steps_edit_main = array(
-"Event Infomation"=>array(
-    "FormElement"=>array(
-        array("fieldname"=>"Conference ID","type"=>"textbox", "property"=>array("name"=>"confID", "required"=>"")),
-        array("fieldname"=>"Event Name", "type"=>"textbox", "property"=>array("name"=>"EventName", "required"=>"")),
-        array("fieldname"=>"Location", "type"=>"textbox", "property"=>array("name"=>"EventLocation", "required"=>"")),
-        array("fieldname"=>"Date", "type"=>"datetime", "class"=>"datetime", "property"=>array("name"=>"EventDate", "required"=>"")),
-        array("fieldname"=>"Event Group", "type"=>"dropdown", "options"=>$EventGroup, "property"=>array("name"=>"EventGroupID")),
-        array("fieldname"=>"", "type"=>"div", "class"=>"", "property"=>array("name"=>"FloorPlanQueue", "width"=>300, "height"=>200
-    ),
-    "PageConfig"=>array("ProcessMethod"=>"Event_Save"))
-)));
+
 
 $steps_edit_floors = array(
-"Event Infomation"=>array(
+"Floor Plan"=>array(
     "FormElement"=>array(
-        array("fieldname"=>"Conference ID","type"=>"textbox", "property"=>array("name"=>"confID", "required"=>"")),
-        array("fieldname"=>"Event Name", "type"=>"textbox", "property"=>array("name"=>"EventName", "required"=>"")),
-        array("fieldname"=>"Location", "type"=>"textbox", "property"=>array("name"=>"EventLocation", "required"=>"")),
-        array("fieldname"=>"Date", "type"=>"datetime", "class"=>"datetime", "property"=>array("name"=>"EventDate", "required"=>"")),
-        array("fieldname"=>"EventGroup", "type"=>"dropdown", "options"=>$EventGroup, "property"=>array("name"=>"EventGroupID"))),
-    "PageConfig"=>array("ProcessMethod"=>"Event_Create")),
-"Upload Content"=>array(
-    "FormElement"=>array(
+      
         array("fieldname"=>"Select Floor Plan","type"=>"dropdown", 
-              "options"=>$FloorPlans, "class"=>"Expandable Previewable","property"=>array("name"=>"Floorplans[]")),
+              "options"=>$FloorPlans, "class"=>"Previewable","property"=>array("name"=>"Floorplans")),
         array("fieldname"=>"","type"=>"button", "property"=>array("ID"=>"btnUpload", "value"=>"Upload", "required"=>""))),
-    "PageConfig"=>array("ProcessMethod"=>"Content_Upload")),
+    "PageConfig"=>array("ProcessMethod"=>"Content_Upload_edit")),
 "Create and Add"=>array(
     "FormElement"=>array(
         array("fieldname"=>"", "type"=>"div","property"=>array("ID"=>"svgsketch", "name"=>"RoomInterface"))),
-    "PageConfig"=>array("ProcessMethod"=>"Create_Rooms")),
+    "PageConfig"=>array("ProcessMethod"=>"Create_Rooms_edit")),
 "Review"=>array(
     "FormElement"=>array(
         array("fieldname"=>"", "type"=>"div","property"=>array("ID"=>"svgView", "name"=>"SessionReview"))
     
     ),
-    "PageConfig"=>array("ProcessMethod"=>"Final_Review"))
+    "PageConfig"=>array("ProcessMethod"=>"Final_Review_edit"))
 );
 
 ?>

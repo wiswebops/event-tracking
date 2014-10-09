@@ -21,12 +21,23 @@ function checkOverlap (node)
 	return false;
 }
 
+
 function optionUpdate()
 {
-	$('#popup select option').attr('disabled',false);
+	
+   
+    $.post('getAssignedScanner.php',{eventID:cur_event},function(data){
+       var parsed = JSON.parse(data);
+       parsed.forEach(function(nodez){
+            $('#popup select').find('option[value='+nodez+']').attr('disabled',true);
+       });
+    });
+    $('#popup select option').attr('disabled',false);
 	 drawNodes.forEach(function(nodez){
 							
 			if(nodez.getAttribute('delete') != 'true')
 					$('#popup select').find('option[value='+nodez.getAttribute('scannerid')+']').attr('disabled',true);				
 	 });
+   
+   
 }

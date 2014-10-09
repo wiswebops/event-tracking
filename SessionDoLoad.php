@@ -1,17 +1,13 @@
-<?php /*
-session_start();
-if(isset($_SESSION['user'])) { */
-?>
+
 <?php
 include('includes/functions.php');
+
 $floor_id = $_POST['level_id'];
 $roomIds = implode(",",$_POST['room_ids']);
-
 $SessionData = getSessionsByRoomIDs($roomIds);
 echo json_encode($SessionData);
 unset($SessionData);
 
-mysql_close();
 return;
 
 if(isset($_POST['submit'])) {
@@ -35,5 +31,5 @@ if(isset($_POST['submit'])) {
 } else {
 	header("location: login.php");
 }*/
-mysql_close();
+
 ?>

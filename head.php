@@ -21,28 +21,24 @@
 <link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/south-street/jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="js/jquery.bookmark.css"/>
-
-
 <script>
-$(function() {
-		   
-$(document).ready(function() {
-						  
-	$(".various").fancybox({
-		maxWidth	: 800,
-		maxHeight	: 600,
-		fitToView	: false,
-		width		: '70%',
-		height		: '70%',
-		autoSize	: false,
-		closeClick	: false,
-		openEffect	: 'none',
-		closeEffect	: 'none',
-		scrolling: 'no',
-	});
-});	
+$.extend(
+{
+    redirectPost: function(location, args)
+    {
+        var form = '';
+        $.each( args, function( key, value ) {
+            form += '<input type="hidden" name="'+key+'" value="'+value+'">';
+        });
+        $('<form action="' + location + '" method="POST">' + form + '</form>').appendTo($(document.body)).submit();
+    }
 });
 
+function openEditWizard(event_uid)
+    {
+      var  redirect='editRoomInfo.php';
+      $.redirectPost(redirect, {event_uid: event_uid});
+    }
 </script>
 </head>
 

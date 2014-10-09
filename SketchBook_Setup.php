@@ -149,7 +149,7 @@ var X = $.noConflict(true);
 <script type="text/javascript" src="js/jquery.svggraph.js"></script>
 <script type="text/javascript" src="js/jquery.svgplot.js"></script>
 <script type="text/javascript" src="js/jquery.chili-2.2.js"></script>
-<script type="text/javascript" src="js/utility_functions.js"></script>
+<script type="text/javascript" src="js/utility_function.js"></script>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
@@ -367,7 +367,7 @@ $('#popupconfirm').live('click',function(){
 function viewPadClick(event)
 {
 	//offset = ($.browser.msie ? {left: 0, top: 0} : $('#svgView').offset()); 
-	 
+	
 	//offseted_X =event.clientX-offset.left
     //offseted_Y =event.clientY-offset.top;
 	currentNode = $(this);
@@ -459,7 +459,7 @@ function Room_2_Level_Save(event_id, floor_id, functionx)
     
 function Load_Structure(event_id, floor_id, MDFunction, MUFunction, pad)
 {
-		$.ajax({
+		return $.ajax({
            			type: "POST",
           			url: "roomsDoLoad.php",
            			data: {confID: event_id, level_id: floor_id},
@@ -514,6 +514,64 @@ function Sessions_Save(event_id, floor_id, oncomplete)
 					}
 	}).done();
 		
-}   
+}  
+    
+    
+    
+	function Sessions_Load(event_id, floor_id)
+	{
+		
+        
+		$.ajax({
+           			type: "POST",
+          			url: "SessionDoLoad.php",
+           			data: {confID: event_id, level_id: floor_id , room_ids: Object.keys(Nodes_2_Sessions)},
+		   			cache: false,
+				    dataType: "json",
+		   			success: function(data){
+						   //reset data
+                            //$('body').prepend(data);
+						    //console.log(data);  
+                           
+                       /* for (var member in Nodes_2_Sessions) 
+						   	{
+									  
+                                Nodes_2_Sessions[member].forEach(function(entry){
+									  $(entry).draggable({helper: 'clone'}).appendTo($('#catalog'));});
+								Nodes_2_Sessions[member]=[];
+							  
+						   }*/
+                           
+						  // $('#catalog .SessionRemove').remove();
+                       
+						   $.each(data, function(index, value) {
+								    //console.log(value.SessionID, value.RoomID);	 
+									var temp_session = $('#catalog li[value="'+value.SessionID+'"]').remove();
+									Nodes_2_Sessions[value.RoomID].push( temp_session.append('<img src="images/drag_delete.png" class="SessionRemove" style="margin-left:5px"/>') );
+                            });   
+					}
+	});
+		
+}
+    
+function getData(option,parameters)
+{
+    var datax = {choice: option};
+    datax['choice'] = option;
+    for (var attrname in parameters)
+    datax[attrname]=parameters[attrname];
+    
+    return $.ajax({
+           		type: "POST",
+          		url: "DataRetrieve.php",
+           	    data: datax,
+		        cache: false,
+				dataType: "json",
+		        success: function(x){
+                    return x;
+                }});
+    
+}
+    
 
 </script>
